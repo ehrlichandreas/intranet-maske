@@ -60,7 +60,7 @@ $config = array
         ),
         'frontend-main-intranet-registration'    => array
         (
-            'route'     => 'faq',
+            'route'     => 'registration',
             'defaults'  => array
             (
                 'module'        => 'frontend',
