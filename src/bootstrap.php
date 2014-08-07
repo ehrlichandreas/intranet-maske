@@ -37,7 +37,7 @@ if(file_exists($autolodFile2) && is_readable($autolodFile2))
     require_once $autolodFile2;
 }
 
-require_once dirname(__FILE__) . '/controllers/include.php';
+require_once dirname(__FILE__) . '/modules/include.php';
 
 $config = include dirname(__FILE__) . '/config/config.php';
 

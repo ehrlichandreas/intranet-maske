@@ -7,7 +7,7 @@ $mail = $value->mail;
 $transport = $mail->transport;
 
 $basePath = dirname(dirname(__FILE__));
-$frontendViewPath = $basePath . '/controllers/Frontend/view';
+$frontendViewPath = $basePath . '/modules/frontend/view';
 
 $config = array
 (
@@ -30,81 +30,89 @@ $config = array
     ),
     'router'    => array
     (
-//        'default'    => array
-//        (
-//            'route'     => '.*',
-//            'defaults'  => array
-//            (
-//                'module'        => 'default',
-//                'submodule'     => 'default',
-//                'controller'    => 'index',
-//                'action'        => 'index',
-//            ),
-//            'map'       => array(),
-//            'reverse'   => '',
-//            'callbacks' => array(),
-//        ),
-        'frontend-main-static-faq'    => array
+        'default'    => array
+        (
+            'route'     => '.*',
+            'defaults'  => array
+            (
+                'module'        => 'default',
+                'submodule'     => 'default',
+                'controller'    => 'index',
+                'action'        => 'index',
+            ),
+            'map'       => array(),
+            'reverse'   => '',
+            'callbacks' => array(),
+        ),
+        'frontend-main-intranet-export'    => array
+        (
+            'route'     => 'export',
+            'defaults'  => array
+            (
+                'module'        => 'frontend',
+                'submodule'     => 'main',
+                'controller'    => 'intranet',
+                'action'        => 'export',
+            ),
+            'map'       => array(),
+            'reverse'   => 'export',
+            'callbacks' => array(),
+        ),
+        'frontend-main-intranet-registration'    => array
         (
             'route'     => 'faq',
             'defaults'  => array
             (
-                'module'        => 'Frontend',
-                'submodule'     => 'Main',
-                'controller'    => 'Static',
-                'action'        => 'faq',
+                'module'        => 'frontend',
+                'submodule'     => 'main',
+                'controller'    => 'intranet',
+                'action'        => 'registration',
             ),
             'map'       => array(),
-            'reverse'   => 'faq',
+            'reverse'   => 'registration',
             'callbacks' => array(),
         ),
-        'frontend-main-static-imprint'    => array
+        'frontend-main-intranet-list'    => array
         (
-            'route'     => 'imprint',
+            'route'     => 'page\/?|page\/(\d+)',
             'defaults'  => array
             (
-                'module'        => 'Frontend',
-                'submodule'     => 'Main',
-                'controller'    => 'Static',
-                'action'        => 'imprint',
+                'module'        => 'frontend',
+                'submodule'     => 'main',
+                'controller'    => 'intranet',
+                'action'        => 'view',
+                'page'          => '1',
             ),
-            'map'       => array(),
-            'reverse'   => 'imprint',
+            'map'       => array
+            (
+				'page'  => 1,
+            ),
+            'reverse'   => 'page/%1$s',
             'callbacks' => array(),
         ),
-		'frontend-user-register-emailconfirm'    => array
-		(
-			'route'     => 'confirm',
-			'defaults'  => array
-			(
-				'module'        => 'Frontend',
-				'submodule'     => 'User',
-				'controller'    => 'Register',
-				'action'        => 'emailconfirm',
-			),
-			'map'       => array(),
-			'reverse'   => 'confirm',
-			'callbacks' => array(),
-		),
-		'frontend-user-register-registration'    => array
-		(
-			'route'     => 'registration',
-			'defaults'  => array
-			(
-				'module'        => 'Frontend',
-				'submodule'     => 'User',
-				'controller'    => 'Register',
-				'action'        => 'registration',
-			),
-			'map'       => array(),
-			'reverse'   => 'registration',
-			'callbacks' => array(),
-		),
+        'frontend-main-intranet-view'    => array
+        (
+            'route'     => 'view\/?|view\/(\d+)',
+            'defaults'  => array
+            (
+                'module'        => 'frontend',
+                'submodule'     => 'main',
+                'controller'    => 'intranet',
+                'action'        => 'view',
+                'id'            => '-1',
+            ),
+            'map'       => array
+            (
+				'id'    => 1,
+            ),
+            'reverse'   => 'view/%1$s',
+            'callbacks' => array(),
+        ),
     ),
     
     'view'      => array
     (
-        'scriptPath'    => $basePath . '/views',
+        'scriptPath'    => $basePath . '/modules/default/view',
         'fileExtension' => 'phtml',
     ),
     
@@ -208,9 +216,30 @@ $config = array
         (
             'view'  => array
             (
-                'layoutPath'    => $basePath . '/controllers/default/view',
-                'scriptPath'    => $basePath . '/controllers/default/view',
+                'layoutPath'    => $basePath . '/modules/default/view',
+                'scriptPath'    => $basePath . '/modules/default/view',
                 'fileExtension' => 'phtml',
+            ),
+        ),
+        'frontend'   => array
+        (
+            'view'  => array
+            (
+                'layoutPath'    => $frontendViewPath,
+                'scriptPath'    => $frontendViewPath,
+                'fileExtension' => 'phtml',
+            ),
+            'submodules'    => array
+            (
+				'main' => array
+				(
+					'view'  => array
+					(
+						'layoutPath'    => $frontendViewPath,
+						'scriptPath'    => $basePath . '/modules/frontend/main/view',
+						'fileExtension' => 'phtml',
+					),
+				),
             ),
         ),
     ),
