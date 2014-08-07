@@ -91,6 +91,10 @@ class Intranet_UserCms_Module extends EhrlichAndreas_AbstractCms_Module
             'swift'             => 'swift',
             'products'          => 'products',
             'agb'               => 'agb',
+            'phonenumber'       => 'phonenumber',
+            'received'          => 'received',
+            'called'            => 'called',
+            'agent'             => 'agent',
 		);
     }
 
@@ -218,6 +222,22 @@ class Intranet_UserCms_Module extends EhrlichAndreas_AbstractCms_Module
         if (! isset($params['agb']))
         {
             $params['agb'] = '0';
+        }
+        if (! isset($params['phonenumber']))
+        {
+            $params['phonenumber'] = '';
+        }
+        if (! isset($params['received']) || $params['received'] == '0000-00-00 00:00:00' || $params['received'] == '')
+        {
+            $params['received'] = '0001-01-01 00:00:00';
+        }
+        if (! isset($params['called']) || $params['called'] == '0000-00-00 00:00:00' || $params['called'] == '')
+        {
+            $params['called'] = '0001-01-01 00:00:00';
+        }
+        if (! isset($params['agent']))
+        {
+            $params['agent'] = '';
         }
 		
 		$function = 'UserProfile';

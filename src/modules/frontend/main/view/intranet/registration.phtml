@@ -1,0 +1,118 @@
+<?php 
+$invokeParams = $this->invokeParams;
+?>
+<div class="row">
+    <div class="col-sm-12">
+        <form id="coupon_capture" method="post">
+<?php 
+if (isset($this->error['salutation']))
+{
+    foreach($this->error['salutation'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+            <div class="col-sm-offset-3 col-sm-5 noPadding">
+                <select class="col-sm-12" name="salutation">
+                    <option value="Herr" <?php echo (isset($invokeParams['salutation']) && $invokeParams['salutation'] == 'Herr') ? 'selected="selected"' : '';?>>Herr</option>
+                    <option value="Frau" <?php echo (isset($invokeParams['salutation']) && $invokeParams['salutation'] == 'Frau') ? 'selected="selected"' : '';?>>Frau</option>
+                </select>
+            </div><br /><br />
+<?php 
+if (isset($this->error['firstname']))
+{
+    foreach($this->error['firstname'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+            <input class="col-sm-offset-3 col-sm-5 semiBold" name="firstname" type="text" placeholder="Vorname" value="<?php echo $this->escape($invokeParams['firstname']);?>"/><br /><br />
+<?php 
+if (isset($this->error['secondname']))
+{
+    foreach($this->error['secondname'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+            <input class="col-sm-offset-3 col-sm-5 semiBold" name="secondname" type="text" placeholder="Nachname" value="<?php echo $this->escape($invokeParams['secondname']);?>"/><br /><br />
+<?php 
+if (isset($this->error['email']))
+{
+    foreach($this->error['email'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+            <input class="col-sm-offset-3 col-sm-5 semiBold" name="email" type="text" placeholder="E-Mail-Adresse" value="<?php echo $this->escape($invokeParams['email']);?>"/><br /><br />
+<?php 
+if (isset($this->error['phonenumber']))
+{
+    foreach($this->error['phonenumber'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+            <input class="col-sm-offset-3 col-sm-5 semiBold" name="phonenumber" type="text" placeholder="Telefonnummer" value="<?php echo $this->escape($invokeParams['phonenumber']);?>"/><br /><br />
+<?php 
+if (isset($this->error['received']))
+{
+    foreach($this->error['received'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+            <input class="col-sm-offset-3 col-sm-5 semiBold" name="received" type="text" placeholder="Erhalten am" value="<?php echo $this->escape($invokeParams['received']);?>"/><br /><br />
+<?php 
+if (isset($this->error['called']))
+{
+    foreach($this->error['called'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+            <input class="col-sm-offset-3 col-sm-5 semiBold" name="called" type="text" placeholder="Angerufen am" value="<?php echo $this->escape($invokeParams['called']);?>"/><br /><br />
+<?php 
+if (isset($this->error['agent']))
+{
+    foreach($this->error['agent'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+            <input class="col-sm-offset-3 col-sm-5 semiBold" name="agent" type="text" placeholder="Agent" value="<?php echo $this->escape($invokeParams['agent']);?>"/>
+            <br /><br />
+            <div class="col-sm-offset-3 col-sm-11 greenColor semiBold center"><br /><div id="message"></div></div>
+            <input id="coupon_capture_submit" class="col-sm-offset-3 col-sm-5 pointer button" name="submit" type="submit" value="Datensatz speichern"/>
+<?php /*?>
+            <br /><br />
+            <div class="col-sm-offset-3 col-sm-11 greenColor semiBold center"><br /><div id="message"></div></div>
+            <div id="coupon_capture_submit" class="col-sm-offset-3 col-sm-5 pointer button">Datensatz speichern</div>
+<?php */?>
+        </form>  
+    </div>
+</div>

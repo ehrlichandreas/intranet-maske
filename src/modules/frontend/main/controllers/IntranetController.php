@@ -4,7 +4,7 @@ class Frontend_Main_IntranetController extends Frontend_Abstract_AbstractControl
 {
     /**
      *
-     * @var Dobild_UserCms_Module 
+     * @var Intranet_UserCms_Module 
      */
     protected $userCmsModule = null;
     
@@ -14,7 +14,7 @@ class Frontend_Main_IntranetController extends Frontend_Abstract_AbstractControl
         
         $dbConfig = $this->getDbConnection();
         
-        $userCmsModule = new Dobild_UserCms_Module($dbConfig);
+        $userCmsModule = new Intranet_UserCms_Module($dbConfig);
         
         $userCmsModule->install();
         
@@ -23,7 +23,7 @@ class Frontend_Main_IntranetController extends Frontend_Abstract_AbstractControl
     
     public function indexAction()
     {
-        return $this->_view->render('register/index');
+        return $this->getView()->render('register/index');
     }
     
     public function registrationAction()
@@ -36,45 +36,45 @@ class Frontend_Main_IntranetController extends Frontend_Abstract_AbstractControl
         {
             if (!isset($invokeParams['salutation']))
             {
-                $error['salutation'][] = 'instranet-frontend-main-instranet-registration-form-error-salutation-set';
+                $error['salutation'][] = 'intranet-frontend-main-intranet-registration-form-error-salutation-set';
             }
-            elseif (!is_string($invokeParams['reg_gender']))
+            elseif (!is_string($invokeParams['salutation']))
             {
-                $error['salutation'][] = 'instranet-frontend-main-instranet-registration-form-error-salutation-string';
+                $error['salutation'][] = 'intranet-frontend-main-intranet-registration-form-error-salutation-string';
             }
-            elseif (!in_array($invokeParams['reg_gender'], array('male', 'female')))
+            elseif (!in_array($invokeParams['salutation'], array('Herr', 'Frau')))
             {
-                $error['salutation'][] = 'instranet-frontend-main-instranet-registration-form-error-salutation-invalid';
+                $error['salutation'][] = 'intranet-frontend-main-intranet-registration-form-error-salutation-invalid';
             }
 
             $validateName = new \Zend_Validate_StringLength(3, 200);
 
             $validateName->setDisableTranslator(true);
             
-            if (!isset($invokeParams['name']))
+            if (!isset($invokeParams['firstname']))
             {
-                $error['name'][] = 'instranet-frontend-main-instranet-registration-form-error-name-set';
+                $error['firstname'][] = 'intranet-frontend-main-intranet-registration-form-error-firstname-set';
             }
-            elseif (!is_string($invokeParams['name']))
+            elseif (!is_string($invokeParams['firstname']))
             {
-                $error['name'][] = 'instranet-frontend-main-instranet-registration-form-error-name-string';
+                $error['firstname'][] = 'intranet-frontend-main-intranet-registration-form-error-firstname-string';
             }
-            elseif (! $validateName->isValid($invokeParams['name']))
+            elseif (! $validateName->isValid($invokeParams['firstname']))
             {
-                $error['name'][] = 'instranet-frontend-main-instranet-registration-form-error-name-invalid';
+                $error['firstname'][] = 'intranet-frontend-main-intranet-registration-form-error-firstname-invalid';
             }
             
-            if (!isset($invokeParams['nickname']))
+            if (!isset($invokeParams['secondname']))
             {
-                $error['nickname'][] = 'instranet-frontend-main-instranet-registration-form-error-nickname-set';
+                $error['secondname'][] = 'intranet-frontend-main-intranet-registration-form-error-secondname-set';
             }
-            elseif (!is_string($invokeParams['nickname']))
+            elseif (!is_string($invokeParams['secondname']))
             {
-                $error['nickname'][] = 'instranet-frontend-main-instranet-registration-form-error-nickname-string';
+                $error['secondname'][] = 'intranet-frontend-main-intranet-registration-form-error-secondname-string';
             }
-            elseif (! $validateName->isValid($invokeParams['nickname']))
+            elseif (! $validateName->isValid($invokeParams['secondname']))
             {
-                $error['nickname'][] = 'instranet-frontend-main-instranet-registration-form-error-nickname-invalid';
+                $error['secondname'][] = 'intranet-frontend-main-intranet-registration-form-error-secondname-invalid';
             }
             
             $validateEmail = new \Zend_Validate_EmailAddress();
@@ -85,77 +85,41 @@ class Frontend_Main_IntranetController extends Frontend_Abstract_AbstractControl
             
             if (!isset($invokeParams['email']))
             {
-                $error['email'][] = 'instranet-frontend-main-instranet-registration-form-error-email-set';
+                $error['email'][] = 'intranet-frontend-main-intranet-registration-form-error-email-set';
             }
             elseif (!is_string($invokeParams['email']))
             {
-                $error['email'][] = 'instranet-frontend-main-instranet-registration-form-error-email-string';
+                $error['email'][] = 'intranet-frontend-main-intranet-registration-form-error-email-string';
             }
-            elseif (! $validateEmail->isValid($invokeParams['name']))
+            elseif (! $validateEmail->isValid($invokeParams['email']))
             {
-                $error['email'][] = 'instranet-frontend-main-instranet-registration-form-error-email-invalid';
-            }
-
-            $validatePassword = new \Zend_Validate_StringLength(6, 200);
-
-            $validatePassword->setDisableTranslator(true);
-            
-            if (!isset($invokeParams['password']))
-            {
-                $error['password'][] = 'instranet-frontend-main-instranet-registration-form-error-password-set';
-            }
-            elseif (!is_string($invokeParams['password']))
-            {
-                $error['password'][] = 'instranet-frontend-main-instranet-registration-form-error-password-string';
-            }
-            elseif (! $validatePassword->isValid($invokeParams['password']))
-            {
-                $error['password'][] = 'instranet-frontend-main-instranet-registration-form-error-password-invalid';
+                $error['email'][] = 'intranet-frontend-main-intranet-registration-form-error-email-invalid';
             }
             
-            if (!isset($invokeParams['repeat_password']))
+            if (!isset($invokeParams['phonenumber']))
             {
-                $error['repeat_password'][] = 'instranet-frontend-main-instranet-registration-form-error-repeat_password-set';
+                $error['phonenumber'][] = 'intranet-frontend-main-intranet-registration-form-error-phonenumber-set';
             }
-            elseif (!is_string($invokeParams['repeat_password']))
+            elseif (!is_string($invokeParams['phonenumber']))
             {
-                $error['repeat_password'][] = 'instranet-frontend-main-instranet-registration-form-error-repeat_password-string';
+                $error['phonenumber'][] = 'intranet-frontend-main-intranet-registration-form-error-phonenumber-string';
             }
-            elseif (! $validatePassword->isValid($invokeParams['repeat_password']))
+            elseif (! $validateName->isValid($invokeParams['phonenumber']))
             {
-                $error['repeat_password'][] = 'instranet-frontend-main-instranet-registration-form-error-repeat_password-invalid';
-            }
-            
-            if (empty($error['password']) && empty($error['repeat_password']) && $invokeParams['password'] != $invokeParams['repeat_password'])
-            {
-                $error['repeat_password'][] = 'instranet-frontend-main-instranet-registration-form-error-repeat_password-identical';
+                $error['phonenumber'][] = 'intranet-frontend-main-intranet-registration-form-error-phonenumber-invalid';
             }
             
-            if (empty($invokeParams['products']))
+            if (!isset($invokeParams['agent']))
             {
-                $invokeParams['products'] = '0';
+                $error['agent'][] = 'intranet-frontend-main-intranet-registration-form-error-agent-set';
             }
-            else
+            elseif (!is_string($invokeParams['agent']))
             {
-                $invokeParams['products'] = '1';
+                $error['agent'][] = 'intranet-frontend-main-intranet-registration-form-error-agent-string';
             }
-
-            $validateTerms = new \Zend_Validate_Regex('#^[1]$#');
-
-            $validateTerms->setDisableTranslator(true);
-
-
-            if (! isset($invokeParams['agb']))
+            elseif (! $validateName->isValid($invokeParams['agent']))
             {
-                $error['agb'][] = 'instranet-frontend-main-instranet-registration-form-error-agb-set';
-            }
-            elseif (! is_numeric($invokeParams['terms']))
-            {
-                $error['agb'][] = 'instranet-frontend-main-instranet-registration-form-error-agb-numeric';
-            }
-            elseif (! $validateTerms->isValid($invokeParams['agb']))
-            {
-                $error['agb'][] = 'instranet-frontend-main-instranet-registration-form-error-agb-invalid';
+                $error['agent'][] = 'intranet-frontend-main-intranet-registration-form-error-agent-invalid';
             }
         }
         
@@ -166,31 +130,51 @@ class Frontend_Main_IntranetController extends Frontend_Abstract_AbstractControl
             $userCmsModule->addUserProfile($invokeParams);
         }
         
-        if (!isset($invokeParams['reg_gender']))
+        if (!isset($invokeParams['salutation']))
         {
-            $invokeParams['reg_gender'] = '';
+            $invokeParams['salutation'] = '';
         }
         
-        if (!isset($invokeParams['name']))
+        if (!isset($invokeParams['firstname']))
         {
-            $invokeParams['name'] = '';
+            $invokeParams['firstname'] = '';
         }
         
-        if (empty($invokeParams['products']))
+        if (!isset($invokeParams['secondname']))
         {
-            $invokeParams['products'] = '0';
-        }
-        else
-        {
-            $invokeParams['products'] = '1';
+            $invokeParams['secondname'] = '';
         }
         
-        return $this->_view->render('register/registration');
-    }
-    
-    public function emailconfirmAction()
-    {
-        return $this->_view->render('register/emailconfirmsuccesfull');
+        if (!isset($invokeParams['email']))
+        {
+            $invokeParams['email'] = '';
+        }
+        
+        if (!isset($invokeParams['phonenumber']))
+        {
+            $invokeParams['phonenumber'] = '';
+        }
+        
+        if (!isset($invokeParams['received']))
+        {
+            $invokeParams['received'] = '';
+        }
+        
+        if (!isset($invokeParams['called']))
+        {
+            $invokeParams['called'] = '';
+        }
+        
+        if (!isset($invokeParams['agent']))
+        {
+            $invokeParams['agent'] = '';
+        }
+        
+        $this->getView()->assign('invokeParams', $invokeParams);
+        
+        $this->getView()->assign('error', $error);
+        
+        return $this->getView()->render('intranet/registration');
     }
 }
 

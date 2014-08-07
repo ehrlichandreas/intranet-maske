@@ -100,6 +100,10 @@ class Intranet_UserCms_Adapter_Pdo_Mysql extends EhrlichAndreas_AbstractCms_Adap
         $query[] = '`swift` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\', ';
         $query[] = '`products` INT(5) NOT NULL DEFAULT \'0\', ';
         $query[] = '`agb` INT(5) NOT NULL DEFAULT \'0\', ';
+        $query[] = '`phonenumber` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\', ';
+        $query[] = '`received` DATETIME NOT NULL DEFAULT \'0001-01-01 00:00:00\', ';
+        $query[] = '`called` DATETIME NOT NULL DEFAULT \'0001-01-01 00:00:00\', ';
+        $query[] = '`agent` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\', ';
         $query[] = 'PRIMARY KEY (`user_profile_id`), ';
         $query[] = 'KEY `idx_email` (`email` (255)), ';
         $query[] = 'KEY `idx_name` (`name` (255)), ';
