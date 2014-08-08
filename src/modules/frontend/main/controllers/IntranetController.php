@@ -128,6 +128,15 @@ class Frontend_Main_IntranetController extends Frontend_Abstract_AbstractControl
             $userCmsModule = $this->userCmsModule;
         
             $userCmsModule->addUserProfile($invokeParams);
+            
+            unset($invokeParams['salutation']);
+            unset($invokeParams['firstname']);
+            unset($invokeParams['secondname']);
+            unset($invokeParams['email']);
+            unset($invokeParams['phonenumber']);
+            unset($invokeParams['received']);
+            unset($invokeParams['called']);
+            unset($invokeParams['agent']);
         }
         
         if (!isset($invokeParams['salutation']))
