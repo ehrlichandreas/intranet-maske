@@ -185,5 +185,183 @@ class Frontend_Main_IntranetController extends Frontend_Abstract_AbstractControl
         
         return $this->getView()->render('intranet/registration');
     }
+    
+    public function exportAction()
+    {
+        $keys = array
+        (
+			'user_profile_id'   => 'ID',
+            'salutation'        => 'Anrede',
+            'firstname'         => 'Vorname',
+            'secondname'        => 'Nachname',
+            'email'             => 'E-Mail-Adresse',
+            'phonenumber'       => 'Telefonnummer',
+            'received'          => 'Erhalten am',
+            'called'            => 'Angerufen am',
+            'agent'             => 'Agent',
+        );
+        
+        $invokeParams = $this->getRequestInvokeParams();
+        
+        $userCmsModule = $this->userCmsModule;
+        
+        $dbConnection = $userCmsModule->getConnection();
+        
+        $param = array
+        (
+            'cols' => array
+            (
+                'user_profile_id'   => 'user_profile_id',
+                'salutation'        => 'salutation',
+                'firstname'         => 'firstname',
+                'secondname'        => 'secondname',
+                'email'             => 'email',
+                'phonenumber'       => 'phonenumber',
+                'received'          => 'received',
+                'called'            => 'called',
+                'agent'             => 'agent',
+            )
+        );
+        
+        if (isset($invokeParams['from']))
+        {
+            $invokeParams['where'][] = new EhrlichAndreas_Db_Expr($dbConnection->quoteInto('received >= ?' , $invokeParams['from']));
+        }
+        
+        if (isset($invokeParams['to']))
+        {
+            $invokeParams['where'][] = new EhrlichAndreas_Db_Expr($dbConnection->quoteInto('received <= ?' , $invokeParams['to']));
+        }
+        
+        $rowset = $userCmsModule->getUserProfileList($param);
+        
+        $csv = array();
+        
+        $header = array_values($keys);
+        
+        foreach ($header as $key=>$name)
+        {
+            $header[$key] = $name.':';
+        }
+        
+        $csv[] = $header;
+        
+        foreach ($rowset as $row)
+        {
+            $rowTmp = array();
+            
+            foreach ($keys as $key => $value)
+            {
+                if (isset($row[$key]))
+                {
+                    $rowTmp[$key] = $row[$key];
+                }
+                else
+                {
+                    $rowTmp[$key] = '';
+                }
+            }
+            
+            $csv[] = $rowTmp;
+        }
+        
+        foreach ($csv as $key=>$value)
+        {
+            foreach ($value as $k=>$v)
+            {
+                if (preg_match('/[\\n\\r\\t\"\;]/',$v))
+                {
+                    $v = str_replace('"','""',$v);
+                }
+                
+                if ($key !== 0 || $k !== 0)
+                {
+                    $v = '"'.$v.'"';
+                }
+                
+                $value[$k] = $v;
+            }
+            
+            $csv[$key] = implode(";",$value);
+        }
+        
+        $csv = implode("\n",$csv);
+        
+        //$csv = chr(0xEF).chr(0xBB).chr(0xBF).$csv;
+        
+        $response = array
+        (
+            'body'  => $csv,
+            'headers'   => array
+            (
+                array
+                (
+                    'name'      => 'Pragma',
+                    'value'     => 'no-cache',
+                    'replace'   => true,
+                ),
+                array
+                (
+                    'name'      => 'Cache-Control',
+                    'value'     => 'must-revalidate, post-check=0, pre-check=0',
+                    'replace'   => true,
+                ),
+                array
+                (
+                    'name'      => 'Cache-Control',
+                    'value'     => 'private',
+                    'replace'   => false,
+                ),
+                array
+                (
+                    'name'      => 'Content-Transfer-Encoding',
+                    'value'     => 'binary',
+                    'replace'   => true,
+                ),
+                array
+                (
+                    'name'      => 'Content-Disposition',
+                    'value'     => 'attachment; filename="export.csv"',
+                    'replace'   => true,
+                ),
+                array
+                (
+                    'name'      => 'Content-Length',
+                    'value'     => strlen($csv),
+                    'replace'   => true,
+                ),
+                array
+                (
+                    'name'      => 'Content-Type',
+                    'value'     => 'text/csv; charset=utf-8',
+                    'replace'   => true,
+                ),
+                array
+                (
+                    'name'      => 'Vary',
+                    'value'     => 'Accept-Encoding',
+                    'replace'   => true,
+                ),
+            ),
+        );
+        
+		header('HTTP/1.1 200 OK',true,200);
+        
+        
+        foreach ($response['headers'] as $header)
+        {
+            if (isset($header['replace']))
+            {
+                header($header['name'].': '.$header['value'],$header['replace']);
+            }
+            else
+            {
+                header($header['name'].': '.$header['value']);
+            }
+        }
+
+        echo $response['body'];
+        die();
+    }
 }
 
