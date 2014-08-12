@@ -63,7 +63,7 @@ if (isset($this->error['phonenumber']))
     foreach($this->error['phonenumber'] as $errorMessage)
     {
 ?>
-            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+            <p class="col-sm-offset-3 col-sm-5 semiBold" style="color:#ff0000;"><?php echo  $this->escape($errorMessage);?></p><br /><br />
 <?php 
     }
 }
