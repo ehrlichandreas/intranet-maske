@@ -11,22 +11,22 @@ return (object) array(
 	'mail' => (object) array(
 		'main' => (object) array(
 			'from' => (object) array(
-				'email' => 'info@dobild.de',
-				'name'  => 'doBild',
+				'email' => 'info@xxxxx.de',
+				'name'  => 'xxxxx',
 			),
 			'replyto' => (object) array(
-				'email' => 'info@dobild.de',
-				'name'  => 'doBild',
+				'email' => 'info@xxxxx.de',
+				'name'  => 'xxxxx',
 			),
 		),
 		'contact'   => (object) array(
 			'from' => (object) array(
-				'email' => 'contact@dobild.de',
-				'name'  => 'doBild',
+				'email' => 'info@xxxxx.de',
+				'name'  => 'xxxxx',
 			),
 			'replyto' => (object) array(
-				'email' => 'contact@dobild.de',
-				'name'  => 'doBild',
+				'email' => 'info@xxxxx.de',
+				'name'  => 'xxxxx',
 			),
 		),
 		'transport' => (object) array(
