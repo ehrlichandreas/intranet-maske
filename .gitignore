@@ -12,3 +12,7 @@ phpunit.xml
 
 !src/*
 !tests/*
+
+/src/config/configValue/dev.php
+/src/config/configValue/prod.php
+/src/config/configValue/staging.php
