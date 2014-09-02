@@ -3,8 +3,8 @@
 return (object) array(
 	'db' => (object) array(
 		'host' => 'localhost',
-		'port' => '8889',
-		'name' => 'dobild',
+		'port' => '3306',
+		'name' => 'datenerfassung',
 		'username' => 'root',
 		'password' => 'root',
 	),
