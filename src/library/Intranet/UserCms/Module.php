@@ -298,6 +298,18 @@ class Intranet_UserCms_Module extends EhrlichAndreas_AbstractCms_Module
 		
 		return $this->_get($function, $params, $returnAsString);
     }
+
+    /**
+     *
+     * @param array $where
+     * @return array
+     */
+    public function getUserProfileList ($where = array())
+    {
+		$function = 'UserProfile';
+		
+		return $this->_getList($function, $where);
+    }
 	
     /**
      *

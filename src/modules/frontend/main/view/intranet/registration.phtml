@@ -63,7 +63,7 @@ if (isset($this->error['phonenumber']))
     foreach($this->error['phonenumber'] as $errorMessage)
     {
 ?>
-            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+            <p class="col-sm-offset-3 col-sm-5 semiBold" style="color:#ff0000;"><?php echo  $this->escape($errorMessage);?></p><br /><br />
 <?php 
     }
 }
@@ -80,7 +80,7 @@ if (isset($this->error['received']))
     }
 }
 ?>
-            <input class="col-sm-offset-3 col-sm-5 semiBold" name="received" type="text" placeholder="Erhalten am" value="<?php echo $this->escape($invokeParams['received']);?>"/><br /><br />
+            <input class="col-sm-offset-3 col-sm-5 semiBold" name="received" type="text" placeholder="Erhalten am im Format JJJJ-MM-TT" value="<?php echo $this->escape($invokeParams['received']);?>"/><br /><br />
 <?php 
 if (isset($this->error['called']))
 {
@@ -92,7 +92,7 @@ if (isset($this->error['called']))
     }
 }
 ?>
-            <input class="col-sm-offset-3 col-sm-5 semiBold" name="called" type="text" placeholder="Angerufen am" value="<?php echo $this->escape($invokeParams['called']);?>"/><br /><br />
+            <input class="col-sm-offset-3 col-sm-5 semiBold" name="called" type="text" placeholder="Angerufen am im Format JJJJ-MM-TT" value="<?php echo $this->escape($invokeParams['called']);?>"/><br /><br />
 <?php 
 if (isset($this->error['agent']))
 {

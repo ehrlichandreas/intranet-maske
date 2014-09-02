@@ -1,0 +1,36 @@
+<?php 
+$invokeParams = $this->invokeParams;
+?>
+<div class="row">
+    <div class="col-sm-12">
+        <form id="coupon_capture" method="post">
+<?php 
+if (isset($this->error['from']))
+{
+    foreach($this->error['from'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+            <input class="col-sm-offset-3 col-sm-5 semiBold" name="from" type="text" placeholder="Ab Datum im Format JJJJ-MM-TT" value="<?php echo $this->escape($invokeParams['from']);?>"/><br /><br />
+<?php 
+if (isset($this->error['to']))
+{
+    foreach($this->error['to'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+            <input class="col-sm-offset-3 col-sm-5 semiBold" name="to" type="text" placeholder="Bis Datum im Format JJJJ-MM-TT" value="<?php echo $this->escape($invokeParams['to']);?>"/>
+            <br /><br />
+            <div class="col-sm-offset-3 col-sm-11 greenColor semiBold center"><br /><div id="message"></div></div>
+            <input id="coupon_capture_submit" class="col-sm-offset-3 col-sm-5 pointer button" name="submit" type="submit" value="Datensätze exportieren"/>
+        </form>  
+    </div>
+</div>
