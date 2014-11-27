@@ -1,9 +1,17 @@
 <?php 
 $invokeParams = $this->invokeParams;
 ?>
+ <form id="coupon_capture" method="post">
 <div class="row">
-    <div class="col-sm-12">
-        <form id="coupon_capture" method="post">
+    <div class="col-sm-6" style="border-right: 1px solid #ADADAD;">
+
+<!-- ### Neue Felder ### -->
+
+        <input class=" col-sm-12 semiBold" name="idext" type="text" value="" placeholder="ID_EXT" disabled="disabled" /><br /><br />
+
+<!-- ### Ende Neue Felder ### -->      
+            
+           
 <?php 
 if (isset($this->error['salutation']))
 {
@@ -15,7 +23,7 @@ if (isset($this->error['salutation']))
     }
 }
 ?>
-            <div class="col-sm-offset-3 col-sm-5 noPadding">
+            <div class=" col-sm-12 noPadding">
                 <select class="col-sm-12" name="salutation">
                     <option value="Herr" <?php echo (isset($invokeParams['salutation']) && $invokeParams['salutation'] == 'Herr') ? 'selected="selected"' : '';?>>Herr</option>
                     <option value="Frau" <?php echo (isset($invokeParams['salutation']) && $invokeParams['salutation'] == 'Frau') ? 'selected="selected"' : '';?>>Frau</option>
@@ -32,7 +40,7 @@ if (isset($this->error['firstname']))
     }
 }
 ?>
-            <input class="col-sm-offset-3 col-sm-5 semiBold" name="firstname" type="text" placeholder="Vorname" value="<?php echo $this->escape($invokeParams['firstname']);?>"/><br /><br />
+            <input class=" col-sm-12 semiBold" name="firstname" type="text" placeholder="Vorname" value="<?php echo $this->escape($invokeParams['firstname']);?>"/><br /><br />
 <?php 
 if (isset($this->error['secondname']))
 {
@@ -44,7 +52,43 @@ if (isset($this->error['secondname']))
     }
 }
 ?>
-            <input class="col-sm-offset-3 col-sm-5 semiBold" name="secondname" type="text" placeholder="Nachname" value="<?php echo $this->escape($invokeParams['secondname']);?>"/><br /><br />
+            <input class=" col-sm-12 semiBold" name="secondname" type="text" placeholder="Nachname" value="<?php echo $this->escape($invokeParams['secondname']);?>"/><br /><br />
+
+  
+<!-- ### Neue Felder ### -->
+
+<input class=" col-sm-12 semiBold" name="street" type="text" placeholder="Straße" value=""/><br /><br />
+<input class=" col-sm-12 semiBold" name="zipcode" type="text" placeholder="Postleitzahl" value=""/><br /><br />
+<input class=" col-sm-12 semiBold" name="city" type="text" placeholder="Ort" value=""/><br /><br />
+<input class=" col-sm-12 semiBold" name="birthday" type="text" placeholder="Geburtsdatum" value=""/><br /><br />
+<input class=" col-sm-12 semiBold" name="date_vk" type="text" placeholder="Datum VK" disabled="disabled" value=""/><br /><br />
+
+<!-- ### Ende Neue Felder ### -->  
+    </div>
+    <div class="col-sm-6">
+       
+<!-- ### Neue Felder ### -->            
+
+<input class=" col-sm-12 semiBold" name="adress_source" type="text" placeholder="Adressherkunft" disabled="disabled" value=""/><br /><br />
+<input class=" col-sm-12 semiBold" name="decline_reason" type="text" placeholder="Ablehnungsgrund" disabled="disabled" value=""/><br /><br />
+<input class=" col-sm-12 semiBold" name="pre_phone_selection" type="text" placeholder="Vorwahl" value=""/><br /><br />
+            
+<!-- ### Ende Neue Felder ### -->        
+   
+<?php 
+if (isset($this->error['phonenumber']))
+{
+    foreach($this->error['phonenumber'] as $errorMessage)
+    {
+?>
+            <p class=" col-sm-12 semiBold" style="color:#ff0000;"><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>  
+         
+            <input class=" col-sm-12 semiBold" name="phonenumber" type="text" placeholder="Telefonnummer" value="<?php echo $this->escape($invokeParams['phonenumber']);?>"/><br /><br />
+                    
 <?php 
 if (isset($this->error['email']))
 {
@@ -55,20 +99,19 @@ if (isset($this->error['email']))
 <?php 
     }
 }
-?>
-            <input class="col-sm-offset-3 col-sm-5 semiBold" name="email" type="text" placeholder="E-Mail-Adresse" value="<?php echo $this->escape($invokeParams['email']);?>"/><br /><br />
-<?php 
-if (isset($this->error['phonenumber']))
-{
-    foreach($this->error['phonenumber'] as $errorMessage)
-    {
-?>
-            <p class="col-sm-offset-3 col-sm-5 semiBold" style="color:#ff0000;"><?php echo  $this->escape($errorMessage);?></p><br /><br />
-<?php 
-    }
-}
-?>
-            <input class="col-sm-offset-3 col-sm-5 semiBold" name="phonenumber" type="text" placeholder="Telefonnummer" value="<?php echo $this->escape($invokeParams['phonenumber']);?>"/><br /><br />
+?>              
+                         
+   <input class=" col-sm-12 semiBold" name="email" type="text" placeholder="E-Mail-Adresse" value="<?php echo $this->escape($invokeParams['email']);?>"/><br /><br />
+
+   
+   
+<!-- ### Neue Felder ### -->            
+
+<input class=" col-sm-12 semiBold" name="comment" type="text" placeholder="Bemerkung" value=""/><br /><br />
+            
+<!-- ### Ende Neue Felder ### -->   
+   
+   
 <?php 
 if (isset($this->error['received']))
 {
@@ -79,8 +122,10 @@ if (isset($this->error['received']))
 <?php 
     }
 }
-?>
-            <input class="col-sm-offset-3 col-sm-5 semiBold" name="received" type="text" placeholder="Erhalten am im Format JJJJ-MM-TT" value="<?php echo $this->escape($invokeParams['received']);?>"/><br /><br />
+?>       
+   
+    <input class=" col-sm-12 semiBold" name="received" type="text" placeholder="Erhalten am im Format JJJJ-MM-TT" value="<?php echo $this->escape($invokeParams['received']);?>"/><br /><br />
+  
 <?php 
 if (isset($this->error['called']))
 {
@@ -91,9 +136,11 @@ if (isset($this->error['called']))
 <?php 
     }
 }
-?>
-            <input class="col-sm-offset-3 col-sm-5 semiBold" name="called" type="text" placeholder="Angerufen am im Format JJJJ-MM-TT" value="<?php echo $this->escape($invokeParams['called']);?>"/><br /><br />
-<?php 
+?>    
+    
+     <input class=" col-sm-12 semiBold" name="called" type="text" placeholder="Angerufen am im Format JJJJ-MM-TT" value="<?php echo $this->escape($invokeParams['called']);?>"/><br /><br />
+
+ <?php 
 if (isset($this->error['agent']))
 {
     foreach($this->error['agent'] as $errorMessage)
@@ -103,16 +150,30 @@ if (isset($this->error['agent']))
 <?php 
     }
 }
-?>
-            <input class="col-sm-offset-3 col-sm-5 semiBold" name="agent" type="text" placeholder="Agent" value="<?php echo $this->escape($invokeParams['agent']);?>"/>
-            <br /><br />
-            <div class="col-sm-offset-3 col-sm-11 greenColor semiBold center"><br /><div id="message"></div></div>
-            <input id="coupon_capture_submit" class="col-sm-offset-3 col-sm-5 pointer button" name="submit" type="submit" value="Datensatz speichern"/>
+?>               
+                
+    <input class=" col-sm-12 semiBold" name="agent" type="text" placeholder="Agent" value="<?php echo $this->escape($invokeParams['agent']);?>"/><br /><br />
+            
+            
 <?php /*?>
             <br /><br />
-            <div class="col-sm-offset-3 col-sm-11 greenColor semiBold center"><br /><div id="message"></div></div>
-            <div id="coupon_capture_submit" class="col-sm-offset-3 col-sm-5 pointer button">Datensatz speichern</div>
+            <div class=" col-sm-11 greenColor semiBold center"><br /><div id="message"></div></div>
+            <div id="coupon_capture_submit" class=" col-sm-12 pointer button">Datensatz speichern</div>
 <?php */?>
-        </form>  
+        
+    </div>
+    
+</div>
+<br />
+<div class="row">
+    <div class="col-sm-offset-3 col-sm-6">      
+        <input style="transform: scale(2); float: left;" name="warrant" type="checkbox" value="send warrant" /><div style="font-size: 20px; margin-left: 15px; float: left;">Möchte Vollmacht haben</div>
     </div>
 </div>
+<div class="row">
+    <div class="col-sm-offset-3 col-sm-6">
+        <div class=" col-sm-11 greenColor semiBold center"><br /><div id="message"></div></div>
+            <input id="coupon_capture_submit" class=" col-sm-12 pointer button" name="submit" type="submit" value="Datensatz speichern"/>
+    </div>
+</div>
+</form>  
