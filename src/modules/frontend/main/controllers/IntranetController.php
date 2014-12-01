@@ -141,17 +141,35 @@ class Frontend_Main_IntranetController extends Frontend_Abstract_AbstractControl
         if ($this->getRequest()->isPost() && count($error) == 0)
         {
             $userCmsModule = $this->userCmsModule;
+            
+            $invokeParams['warrant'] = intval(!empty($invokeParams['warrant']));
         
             $userCmsModule->addUserProfile($invokeParams);
             
+            unset($invokeParams['idext']);
             unset($invokeParams['salutation']);
             unset($invokeParams['firstname']);
             unset($invokeParams['secondname']);
+            unset($invokeParams['street']);
+            unset($invokeParams['postcode']);
+            unset($invokeParams['city']);
+            unset($invokeParams['birthday']);
+            unset($invokeParams['date_vk']);
+            unset($invokeParams['adress_source']);
+            unset($invokeParams['decline_reason']);
+            unset($invokeParams['pre_phone_selection']);
             unset($invokeParams['email']);
+            unset($invokeParams['comment']);
             unset($invokeParams['phonenumber']);
             unset($invokeParams['received']);
             unset($invokeParams['called']);
             unset($invokeParams['agent']);
+            unset($invokeParams['warrant']);
+        }
+        
+        if (!isset($invokeParams['idext']))
+        {
+            $invokeParams['idext'] = '';
         }
         
         if (!isset($invokeParams['salutation']))
@@ -169,9 +187,54 @@ class Frontend_Main_IntranetController extends Frontend_Abstract_AbstractControl
             $invokeParams['secondname'] = '';
         }
         
+        if (!isset($invokeParams['street']))
+        {
+            $invokeParams['street'] = '';
+        }
+        
+        if (!isset($invokeParams['postcode']))
+        {
+            $invokeParams['postcode'] = '';
+        }
+        
+        if (!isset($invokeParams['city']))
+        {
+            $invokeParams['city'] = '';
+        }
+        
+        if (!isset($invokeParams['birthday']))
+        {
+            $invokeParams['birthday'] = '';
+        }
+        
+        if (!isset($invokeParams['date_vk']))
+        {
+            $invokeParams['date_vk'] = '';
+        }
+        
+        if (!isset($invokeParams['adress_source']))
+        {
+            $invokeParams['adress_source'] = '';
+        }
+        
+        if (!isset($invokeParams['decline_reason']))
+        {
+            $invokeParams['decline_reason'] = '';
+        }
+        
+        if (!isset($invokeParams['pre_phone_selection']))
+        {
+            $invokeParams['pre_phone_selection'] = '';
+        }
+        
         if (!isset($invokeParams['email']))
         {
             $invokeParams['email'] = '';
+        }
+        
+        if (!isset($invokeParams['comment']))
+        {
+            $invokeParams['comment'] = '';
         }
         
         if (!isset($invokeParams['phonenumber']))
@@ -194,6 +257,11 @@ class Frontend_Main_IntranetController extends Frontend_Abstract_AbstractControl
             $invokeParams['agent'] = '';
         }
         
+        if (!isset($invokeParams['warrant']))
+        {
+            $invokeParams['warrant'] = '';
+        }
+        
         $this->getView()->assign('invokeParams', $invokeParams);
         
         $this->getView()->assign('error', $error);
@@ -211,15 +279,26 @@ class Frontend_Main_IntranetController extends Frontend_Abstract_AbstractControl
         {
             $keys = array
             (
-                'user_profile_id'   => 'ID',
-                'salutation'        => 'Anrede',
-                'firstname'         => 'Vorname',
-                'secondname'        => 'Nachname',
-                'email'             => 'E-Mail-Adresse',
-                'phonenumber'       => 'Telefonnummer',
-                'received'          => 'Erhalten am',
-                'called'            => 'Angerufen am',
-                'agent'             => 'Agent',
+                'user_profile_id'       => 'ID',
+                'idext'                 => 'ID_EXT',
+                'salutation'            => 'Anrede',
+                'firstname'             => 'Vorname',
+                'secondname'            => 'Nachname',
+                'street'                => 'Straße',
+                'postcode'              => 'PLZ',
+                'city'                  => 'Stadt',
+                'birthday'              => 'Geburtsdatum',
+                'date_vk'               => 'Datum VK',
+                'adress_source'         => 'Adressherkunft',
+                'decline_reason'        => 'Ablehnungsgrund',
+                'pre_phone_selection'   => 'Vorwahl',
+                'email'                 => 'E-Mail-Adresse',
+                'comment'               => 'Bemerkung',
+                'phonenumber'           => 'Telefonnummer',
+                'received'              => 'Erhalten am',
+                'called'                => 'Angerufen am',
+                'agent'                 => 'Agent',
+                'warrant'               => 'Möchte Vollmacht haben',
             );
         
             $userCmsModule = $this->userCmsModule;
@@ -230,15 +309,26 @@ class Frontend_Main_IntranetController extends Frontend_Abstract_AbstractControl
             (
                 'cols' => array
                 (
-                    'user_profile_id'   => 'user_profile_id',
-                    'salutation'        => 'salutation',
-                    'firstname'         => 'firstname',
-                    'secondname'        => 'secondname',
-                    'email'             => 'email',
-                    'phonenumber'       => 'phonenumber',
-                    'received'          => 'received',
-                    'called'            => 'called',
-                    'agent'             => 'agent',
+                    'user_profile_id'       => 'user_profile_id',
+                    'idext'                 => 'idext',
+                    'salutation'            => 'salutation',
+                    'firstname'             => 'firstname',
+                    'secondname'            => 'secondname',
+                    'street'                => 'street',
+                    'postcode'              => 'postcode',
+                    'city'                  => 'city',
+                    'birthday'              => 'birthday',
+                    'date_vk'               => 'date_vk',
+                    'adress_source'         => 'adress_source',
+                    'decline_reason'        => 'decline_reason',
+                    'pre_phone_selection'   => 'pre_phone_selection',
+                    'email'                 => 'email',
+                    'comment'               => 'comment',
+                    'phonenumber'           => 'phonenumber',
+                    'received'              => 'received',
+                    'called'                => 'called',
+                    'agent'                 => 'agent',
+                    'warrant'               => 'warrant',
                 )
             );
 
@@ -268,6 +358,15 @@ class Frontend_Main_IntranetController extends Frontend_Abstract_AbstractControl
             foreach ($rowset as $row)
             {
                 $rowTmp = array();
+                
+                if (empty($row['warrant']))
+                {
+                    $row['warrant'] = 'nein';
+                }
+                else
+                {
+                    $row['warrant'] = 'ja';
+                }
 
                 foreach ($keys as $key => $value)
                 {
@@ -398,6 +497,11 @@ class Frontend_Main_IntranetController extends Frontend_Abstract_AbstractControl
         $this->getView()->assign('error', $error);
         
         return $this->getView()->render('intranet/export');
+    }
+    
+    public function viewAction()
+    {
+        
     }
 }
 

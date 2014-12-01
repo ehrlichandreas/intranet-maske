@@ -7,7 +7,7 @@ $invokeParams = $this->invokeParams;
 
 <!-- ### Neue Felder ### -->
 
-        <input class=" col-sm-12 semiBold" name="idext" type="text" value="" placeholder="ID_EXT" disabled="disabled" /><br /><br />
+        <input class=" col-sm-12 semiBold" name="idext" type="text" value="<?php echo $this->escape($invokeParams['idext']);?>" placeholder="ID_EXT" disabled="disabled" /><br /><br />
 
 <!-- ### Ende Neue Felder ### -->      
             
@@ -57,11 +57,66 @@ if (isset($this->error['secondname']))
   
 <!-- ### Neue Felder ### -->
 
-<input class=" col-sm-12 semiBold" name="street" type="text" placeholder="Straße" value=""/><br /><br />
-<input class=" col-sm-12 semiBold" name="zipcode" type="text" placeholder="Postleitzahl" value=""/><br /><br />
-<input class=" col-sm-12 semiBold" name="city" type="text" placeholder="Ort" value=""/><br /><br />
-<input class=" col-sm-12 semiBold" name="birthday" type="text" placeholder="Geburtsdatum" value=""/><br /><br />
-<input class=" col-sm-12 semiBold" name="date_vk" type="text" placeholder="Datum VK" disabled="disabled" value=""/><br /><br />
+<?php 
+if (isset($this->error['street']))
+{
+    foreach($this->error['street'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+<input class=" col-sm-12 semiBold" name="street" type="text" placeholder="Straße" value="<?php echo $this->escape($invokeParams['street']);?>"/><br /><br />
+<?php 
+if (isset($this->error['postcode']))
+{
+    foreach($this->error['postcode'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+<input class=" col-sm-12 semiBold" name="postcode" type="text" placeholder="Postleitzahl" value="<?php echo $this->escape($invokeParams['postcode']);?>"/><br /><br />
+<?php 
+if (isset($this->error['city']))
+{
+    foreach($this->error['city'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+<input class=" col-sm-12 semiBold" name="city" type="text" placeholder="Ort" value="<?php echo $this->escape($invokeParams['city']);?>"/><br /><br />
+<?php 
+if (isset($this->error['birthday']))
+{
+    foreach($this->error['birthday'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+<input class=" col-sm-12 semiBold" name="birthday" type="text" placeholder="Geburtsdatum" value="<?php echo $this->escape($invokeParams['birthday']);?>"/><br /><br />
+<?php 
+if (isset($this->error['date_vk']))
+{
+    foreach($this->error['date_vk'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+<input class=" col-sm-12 semiBold" name="date_vk" type="text" placeholder="Datum VK" disabled="disabled" value="<?php echo $this->escape($invokeParams['date_vk']);?>"/><br /><br />
 
 <!-- ### Ende Neue Felder ### -->  
     </div>
@@ -69,9 +124,42 @@ if (isset($this->error['secondname']))
        
 <!-- ### Neue Felder ### -->            
 
-<input class=" col-sm-12 semiBold" name="adress_source" type="text" placeholder="Adressherkunft" disabled="disabled" value=""/><br /><br />
-<input class=" col-sm-12 semiBold" name="decline_reason" type="text" placeholder="Ablehnungsgrund" disabled="disabled" value=""/><br /><br />
-<input class=" col-sm-12 semiBold" name="pre_phone_selection" type="text" placeholder="Vorwahl" value=""/><br /><br />
+<?php 
+if (isset($this->error['adress_source']))
+{
+    foreach($this->error['adress_source'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+<input class=" col-sm-12 semiBold" name="adress_source" type="text" placeholder="Adressherkunft" disabled="disabled" value="<?php echo $this->escape($invokeParams['adress_source']);?>"/><br /><br />
+<?php 
+if (isset($this->error['decline_reason']))
+{
+    foreach($this->error['decline_reason'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+<input class=" col-sm-12 semiBold" name="decline_reason" type="text" placeholder="Ablehnungsgrund" disabled="disabled" value="<?php echo $this->escape($invokeParams['decline_reason']);?>"/><br /><br />
+<?php 
+if (isset($this->error['pre_phone_selection']))
+{
+    foreach($this->error['pre_phone_selection'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+<input class=" col-sm-12 semiBold" name="pre_phone_selection" type="text" placeholder="Vorwahl" value="<?php echo $this->escape($invokeParams['pre_phone_selection']);?>"/><br /><br />
             
 <!-- ### Ende Neue Felder ### -->        
    
@@ -107,7 +195,18 @@ if (isset($this->error['email']))
    
 <!-- ### Neue Felder ### -->            
 
-<input class=" col-sm-12 semiBold" name="comment" type="text" placeholder="Bemerkung" value=""/><br /><br />
+<?php 
+if (isset($this->error['comment']))
+{
+    foreach($this->error['comment'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+<input class=" col-sm-12 semiBold" name="comment" type="text" placeholder="Bemerkung" value="<?php echo $this->escape($invokeParams['comment']);?>"/><br /><br />
             
 <!-- ### Ende Neue Felder ### -->   
    
@@ -167,7 +266,18 @@ if (isset($this->error['agent']))
 <br />
 <div class="row">
     <div class="col-sm-offset-3 col-sm-6">      
-        <input style="transform: scale(2); float: left;" name="warrant" type="checkbox" value="send warrant" /><div style="font-size: 20px; margin-left: 15px; float: left;">Möchte Vollmacht haben</div>
+<?php 
+if (isset($this->error['warrant']))
+{
+    foreach($this->error['warrant'] as $errorMessage)
+    {
+?>
+            <p><?php echo  $this->escape($errorMessage);?></p><br /><br />
+<?php 
+    }
+}
+?>
+        <input style="transform: scale(2); float: left;" name="warrant" type="checkbox" value="send warrant" <?php if (!empty($invokeParams['agent'])){echo 'checked="checked"';}?> /><div style="font-size: 20px; margin-left: 15px; float: left;">Möchte Vollmacht haben</div>
     </div>
 </div>
 <div class="row">

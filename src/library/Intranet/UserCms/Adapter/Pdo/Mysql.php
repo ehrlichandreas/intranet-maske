@@ -104,6 +104,14 @@ class Intranet_UserCms_Adapter_Pdo_Mysql extends EhrlichAndreas_AbstractCms_Adap
         $query[] = '`received` DATETIME NOT NULL DEFAULT \'0001-01-01 00:00:00\', ';
         $query[] = '`called` DATETIME NOT NULL DEFAULT \'0001-01-01 00:00:00\', ';
         $query[] = '`agent` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\', ';
+        $query[] = '`idext` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\', ';
+        $query[] = '`birthday` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\', ';
+        $query[] = '`date_vk` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\', ';
+        $query[] = '`adress_source` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\', ';
+        $query[] = '`decline_reason` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\', ';
+        $query[] = '`pre_phone_selection` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\', ';
+        $query[] = '`comment` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\', ';
+        $query[] = '`warrant` INT(5) NOT NULL DEFAULT \'0\', ';
         $query[] = 'PRIMARY KEY (`user_profile_id`), ';
         $query[] = 'KEY `idx_email` (`email` (255)), ';
         $query[] = 'KEY `idx_name` (`name` (255)), ';

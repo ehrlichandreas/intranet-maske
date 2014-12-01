@@ -35,10 +35,10 @@ $config = array
             'route'     => '.*',
             'defaults'  => array
             (
-                'module'        => 'default',
-                'submodule'     => 'default',
-                'controller'    => 'index',
-                'action'        => 'index',
+                'module'        => 'frontend',
+                'submodule'     => 'main',
+                'controller'    => 'intranet',
+                'action'        => 'registration',
             ),
             'map'       => array(),
             'reverse'   => '',
