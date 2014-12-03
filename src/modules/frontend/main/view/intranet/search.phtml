@@ -1,17 +1,12 @@
 <?php 
 $invokeParams = $this->invokeParams;
 ?>
- <form id="search_data" method="post">
+<form id="search_data" method="post">
 <div class="row">
-   
-    <div class="col-sm-offset-3 col-sm-5">
-       
-          
-
-<input class=" col-sm-12 semiBold" name="search_name" type="text" placeholder="Name" disabled="disabled" value=""/><br /><br />
-            
-     
-   
+    <div class="col-sm-offset-3 col-sm-6">   
+<input class=" col-sm-12 semiBold" name="search_name" type="text" placeholder="Name" value="<?php echo $this->escape($invokeParams['search_name']);?>"/>
+    </div>
+</div><br /><br />
 <div class="row">
     <div class="col-sm-offset-3 col-sm-5">
         <div class=" col-sm-11 greenColor semiBold center"><br /><div id="message"></div></div>
@@ -19,3 +14,18 @@ $invokeParams = $this->invokeParams;
     </div>
 </div>
 </form>  
+
+<div class="row">
+    <div class="col-sm-12">
+<?php
+foreach ($this->userProfiles as $userProfile)
+{
+?>
+        <div>
+            <p><a href="<?php echo $this->url(array('id'=>$userProfile['user_profile_id']), 'frontend-main-intranet-view', true);?>"><?php echo $this->escape($userProfile['firstname'] . ' ' . $userProfile['secondname'] . ', ' . $userProfile['city']);?></a></p>
+        </div>
+<?php
+}
+?>
+    </div>
+</div>

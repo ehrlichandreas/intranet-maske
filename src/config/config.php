@@ -74,7 +74,7 @@ $config = array
         ),
         'frontend-main-intranet-list'    => array
         (
-            'route'     => 'page\/?|page\/(\d+)',
+            'route'     => 'page\/(\d+)|page\/?',
             'defaults'  => array
             (
                 'module'        => 'frontend',
@@ -92,7 +92,7 @@ $config = array
         ),
         'frontend-main-intranet-view'    => array
         (
-            'route'     => 'view\/?|view\/(\d+)',
+            'route'     => 'view\/(\d+)|view\/?',
             'defaults'  => array
             (
                 'module'        => 'frontend',

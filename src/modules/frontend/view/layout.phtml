@@ -76,12 +76,16 @@ foreach ($cssFiles as $cssFile)
                         ?>
         <br /><br /><br />
         <a href="<?php 
-                            echo $this->url(array(), 'frontend-main-intranet-export');
+                            echo $this->url(array(), 'frontend-main-intranet-export', true);
                             ?>">Einträge exportieren</a>
         <br />
         <a href="<?php 
-                            echo $this->url(array(), 'frontend-main-intranet-registration');
+                            echo $this->url(array(), 'frontend-main-intranet-registration', true);
                             ?>">neuen Eintrag anlegen</a>
+        <br />
+        <a href="<?php 
+                            echo $this->url(array(), 'frontend-main-intranet-list', true);
+                            ?>">einen Eintrag suchen</a>
         <br /><br /><br /><br />
     </div>
 <?php 

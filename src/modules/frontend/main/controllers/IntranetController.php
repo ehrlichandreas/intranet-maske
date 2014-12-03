@@ -501,6 +501,187 @@ class Frontend_Main_IntranetController extends Frontend_Abstract_AbstractControl
     
     public function viewAction()
     {
+        $error = array();
+        
+        $invokeParams = $this->getRequestInvokeParams();
+        
+        $userProfiles = array();
+        
+        $userCmsModule = $this->userCmsModule;
+
+        $dbConnection = $userCmsModule->getConnection();
+        
+        if (!isset($invokeParams['idext']))
+        {
+            $invokeParams['idext'] = '';
+        }
+        
+        if (!isset($invokeParams['salutation']))
+        {
+            $invokeParams['salutation'] = '';
+        }
+        
+        if (!isset($invokeParams['firstname']))
+        {
+            $invokeParams['firstname'] = '';
+        }
+        
+        if (!isset($invokeParams['secondname']))
+        {
+            $invokeParams['secondname'] = '';
+        }
+        
+        if (!isset($invokeParams['street']))
+        {
+            $invokeParams['street'] = '';
+        }
+        
+        if (!isset($invokeParams['postcode']))
+        {
+            $invokeParams['postcode'] = '';
+        }
+        
+        if (!isset($invokeParams['city']))
+        {
+            $invokeParams['city'] = '';
+        }
+        
+        if (!isset($invokeParams['birthday']))
+        {
+            $invokeParams['birthday'] = '';
+        }
+        
+        if (!isset($invokeParams['date_vk']))
+        {
+            $invokeParams['date_vk'] = '';
+        }
+        
+        if (!isset($invokeParams['adress_source']))
+        {
+            $invokeParams['adress_source'] = '';
+        }
+        
+        if (!isset($invokeParams['decline_reason']))
+        {
+            $invokeParams['decline_reason'] = '';
+        }
+        
+        if (!isset($invokeParams['pre_phone_selection']))
+        {
+            $invokeParams['pre_phone_selection'] = '';
+        }
+        
+        if (!isset($invokeParams['email']))
+        {
+            $invokeParams['email'] = '';
+        }
+        
+        if (!isset($invokeParams['comment']))
+        {
+            $invokeParams['comment'] = '';
+        }
+        
+        if (!isset($invokeParams['phonenumber']))
+        {
+            $invokeParams['phonenumber'] = '';
+        }
+        
+        if (!isset($invokeParams['received']))
+        {
+            $invokeParams['received'] = '';
+        }
+        
+        if (!isset($invokeParams['called']))
+        {
+            $invokeParams['called'] = '';
+        }
+        
+        if (!isset($invokeParams['agent']))
+        {
+            $invokeParams['agent'] = '';
+        }
+        
+        if (!isset($invokeParams['warrant']))
+        {
+            $invokeParams['warrant'] = '';
+        }
+        
+        if ($this->getRequest()->isPost() && isset($invokeParams['search_name']))
+        {
+            
+            $invokeParams['search_name'] = preg_replace('#\s+#ui', ' ', $invokeParams['search_name']);
+            
+            $invokeParams['search_name'] = trim($invokeParams['search_name']);
+            
+            $searchName = explode(' ', $invokeParams['search_name']);
+            
+            $searchName = array_combine($searchName, $searchName);
+            
+            //$searchName = array_filter($searchName);
+            
+            $param = array
+            (
+                'where' => array(),
+            );
+            
+            foreach ($searchName as $name)
+            {
+                $param['where'][] = new EhrlichAndreas_Db_Expr($dbConnection->quoteInto('firstname LIKE ? OR secondname LIKE ?', '%' . $name . '%'));
+            }
+            
+            if (count($param['where']) > 0)
+            {
+                $userProfiles = $userCmsModule->getUserProfileList($param);
+            }
+        }
+        
+        if ($this->getRequest()->isPost() && isset($invokeParams['id']))
+        {
+            $invokeParams['warrant'] = intval(!empty($invokeParams['warrant']));
+            
+            $param = $invokeParams;
+            
+            $param['where']['user_profile_id'] = $invokeParams['id'];
+        
+            $userCmsModule->editUserProfile($param);
+        }
+        
+        if(isset($invokeParams['id']))
+        {
+            $param = array
+            (
+                'where' => array
+                (
+                    'user_profile_id'   => $invokeParams['id'],
+                ),
+            );
+            
+            $userProfiles = $userCmsModule->getUserProfileList($param);
+            
+            if (count($userProfiles) > 0)
+            {
+                $userProfile = array_shift($userProfiles);
+                
+                $invokeParams = array_merge($invokeParams, $userProfile);
+            }
+        
+            $this->getView()->assign('invokeParams', $invokeParams);
+
+            return $this->getView()->render('intranet/registration');
+        }
+        
+        if (!isset($invokeParams['search_name']))
+        {
+            $invokeParams['search_name'] = '';
+        }
+        
+        $this->getView()->assign('invokeParams', $invokeParams);
+        
+        $this->getView()->assign('error', $error);
+        
+        $this->getView()->assign('userProfiles', $userProfiles);
+        
+        return $this->getView()->render('intranet/search');
         
     }
 }
