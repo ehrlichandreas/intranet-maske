@@ -13,6 +13,7 @@ phpunit.xml
 !src/*
 !tests/*
 
+/src/_errorlog/*.log
 /src/config/configValue/dev.php
 /src/config/configValue/prod.php
 /src/config/configValue/staging.php
