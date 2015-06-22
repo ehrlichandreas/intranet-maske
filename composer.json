@@ -1,7 +1,7 @@
 {
     "name":         "ehrlichandreas/newslettercms",
     "description":  "Zend Framework like newsletter cms",
-    "type":         "cms",
+    "type":         "library",
     "keywords": 
     [
     ],
@@ -23,52 +23,6 @@
     },
     "repositories":
     [
-        {
-            "type": "git",
-            "url": "https://github.com/ehrlichandreas/composer-php52.git"
-        },
-
-        {
-            "type": "git",
-            "url": "https://github.com/ehrlichandreas/ehrlichandreas1-abstractcms.git"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/ehrlichandreas/ehrlichandreas1-db.git"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/ehrlichandreas/ehrlichandreas1-mvc.git"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/ehrlichandreas/ehrlichandreas1-pdo.git"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/ehrlichandreas/ehrlichandreas1-util.git"
-        },
-
-        {
-            "type": "git",
-            "url": "https://github.com/ehrlichandreas/ehrlichandreas1-blogcms.git"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/ehrlichandreas/ehrlichandreas1-keyvaluecms.git"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/ehrlichandreas/ehrlichandreas1-newslettercms.git"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/ehrlichandreas/ehrlichandreas1-stockcms.git"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/ehrlichandreas/ehrlichandreas1-versioningcms.git"
-        }
     ],
     "require": 
     {
